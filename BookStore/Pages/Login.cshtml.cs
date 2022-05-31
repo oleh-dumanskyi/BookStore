@@ -41,9 +41,9 @@ namespace BookStore.Pages
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             ctx.SignInAsync(claimsPrincipal);
-            if (ctx.User.IsInRole("User"))
+            if (claimsPrincipal.IsInRole("User"))
                 return Redirect(returnUrl ?? "~/user");
-            if (ctx.User.IsInRole("Admin"))
+            if (claimsPrincipal.IsInRole("Admin"))
                 return Redirect(returnUrl ?? "~/Admin");
             return Redirect(returnUrl ?? "/");
         }
