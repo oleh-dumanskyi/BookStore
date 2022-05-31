@@ -5,6 +5,7 @@ namespace BookStore.Models.Entities
     public class User
     {
         [Required]
+        [Key]
         public int Id { get; set; }
         [Required]
         [Display(Name = "Имя")]
@@ -18,8 +19,9 @@ namespace BookStore.Models.Entities
         [Display(Name = "Пароль")]
         public string Password { get; set; }
         [Required]
-        ShoppingCart Cart { get; set; }
+        public List<Book> ShoppingCart { get; set; }
         [Required]
-        public bool IsAdmin { get; set; } = false;
+        public Role Role { get; set; }
+        
     }
 }
