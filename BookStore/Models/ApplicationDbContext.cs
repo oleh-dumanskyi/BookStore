@@ -7,6 +7,7 @@ namespace BookStore.Models
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -22,12 +23,16 @@ namespace BookStore.Models
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>()
+                .HasOne(p => p.ShoppingCart).WithOne(p => p.User);
+            modelBuilder.Entity<ShoppingCart>()
+                .HasMany(p => p.Books).WithMany(b => b.ShoppingCarts);
             modelBuilder.Entity<Book>()
-                .HasOne(u => u.User)
-                .WithMany(c => c.ShoppingCart)
-                .HasForeignKey(u => u.UserId);
-        }*/
+                .HasMany(b => b.ShoppingCarts).WithMany(c => c.Books);
+        }
     }
 }

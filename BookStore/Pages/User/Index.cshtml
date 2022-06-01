@@ -3,6 +3,7 @@
 @model BookStore.Pages.User.IndexModel
 @{
     var i = 0;
+    
     <h2>Book store</h2><p></p>
     <p>Hello, @Model._context.Users.FirstOrDefault(u=>u.Email == HttpContext.User.Identity.Name).Name</p>
     <p></p>
@@ -13,7 +14,7 @@
         <input type="submit" value="Add book to cart">
     </form>
     <p></p>
-    <a href="/shoppingcart"><input type="button" value="Shopping Cart"></a>
+    <a href="~/User/shoppingcart"><input type="button" value="Shopping Cart"></a>
     <p></p>
     <a href="~/logout"><input type="button" value="Log Out"></a>
     <br><p></p>

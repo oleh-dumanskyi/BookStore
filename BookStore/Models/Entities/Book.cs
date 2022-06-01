@@ -27,7 +27,7 @@ namespace BookStore.Models.Entities
         [Display(Name = "Стоимость")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Некорректная стоимость")]
         public decimal Price { get; set; }
-
-        public List<User> Users { get; set; } = new List<User>();
+        public List<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
+        public int ShoppingCartId { get; set; }
     }
 }

@@ -1,4 +1,13 @@
 ﻿@page
 @model BookStore.Pages.User.ShoppingCartModel
 @{
+    <h4>Shooping Cart</h4><p></p>
+    <a href="/User/Index"><input type="button" value="Go Back"></a><br><br>
+    <table style="border-style: solid; border-color: lightgrey; border-collapse: collapse">
+        <tr><th>#</th><th>Название</th><th>Автор</th><th>Язык</th><th>Страницы</th><th>Жанр</th><th>Цена</th></tr>
+        @foreach (var book in @Model.Books)
+        {
+            <tr><td>@book.Id</td><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td></tr>
+        }
+    </table>
 }
