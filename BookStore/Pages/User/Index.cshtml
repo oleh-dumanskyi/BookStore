@@ -11,10 +11,10 @@
     <a href="~/logout"><input type="button" value="Log Out"></a>
     <br><p></p>
     <table style="border-style: solid; border-collapse: collapse; border-color: lightgrey">
-            <tr><th>#</th><th>Название</th><th>Автор</th><th>Язык</th><th>Страницы</th><th>Жанр</th><th>Цена</th><th></th></tr>
+            <tr><th>TItle</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th><th></th></tr>
             @foreach (var book in Model._context.Books)
             {
-                <tr><td>@book.Id</td><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
+                <tr><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
                     <td>
                         <form method="post">
                             <button type="submit" asp-route-id="@book.Id">Add to cart</button>
