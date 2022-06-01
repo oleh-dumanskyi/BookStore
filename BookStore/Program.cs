@@ -17,7 +17,8 @@ namespace BookStore
 
             builder.Services.AddRazorPages(options =>
             {
-                options.Conventions.AuthorizePage("/Admin");
+                options.Conventions.AuthorizeAreaFolder("Admin", "/Pages/", "Admin");
+                options.Conventions.AuthorizeAreaFolder("User", "/Pages/", "Admin, User");
             });
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -27,7 +28,11 @@ namespace BookStore
                     options.AccessDeniedPath = "/accessdenied";
                 });
 
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", p=>p.RequireRole("Admin"));
+                options.AddPolicy("User", p=>p.RequireRole("User"));
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString: "DefaultConnection"));
 
