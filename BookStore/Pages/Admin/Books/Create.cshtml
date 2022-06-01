@@ -1,4 +1,37 @@
 ﻿@page
 @model BookStore.Pages.Admin.Books.CreateModel
 @{
+    <h2>Edit book</h2>
+    <p></p>
+    <a href="~/Admin/Books/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <form method="post">
+        <input type="hidden" name="Id" />
+        <p>
+            <label>Title: </label>
+            <input type="text" name="Title" />
+        </p>
+        <p>
+            <label>Author: </label>
+            <input type="text" name="Author" />
+        </p>
+        <p>
+            <label>Language: </label>
+            <input type="text" name="Language" />
+        </p>
+        <p>
+            <label>Pages: </label>
+            <input type="number" name="Pages" />
+        </p>
+        <p>
+            <label>Genre: </label>
+            <input type="text" name="Genre" />
+        </p>
+        <p>
+            <label>Price: </label>
+            <input type="number" name="Price" />
+        </p>
+        <p><input type="hidden" name="ShoppingCartId" /></p>
+        <button type="submit">Add book</button>
+    </form>
 }

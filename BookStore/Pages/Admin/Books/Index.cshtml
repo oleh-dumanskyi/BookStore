@@ -1,4 +1,29 @@
 ﻿@page
 @model BookStore.Pages.Admin.Books.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    <h2>Manage books</h2>
+    <p></p>
+    <a href="/Admin/Books/Create"><input type="button" value="Create book"/></a>
+    <p></p>
+    <a href="~/Admin/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <table style="border-style: solid; border-collapse: collapse; border-color: lightgrey">
+        <tr><th>#</th><th>Title</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th><th> </th><th> </th></tr>
+        @foreach (var book in Model._context.Books)
+        {
+            <tr><td>@book.Id</td><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
+                <td>
+                    <form method="post">
+                        <button type="submit" asp-page="Edit" asp-route-id="@book.Id">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post">
+                        <button type="submit" asp-page-handler="Delete" asp-route-id="@book.Id">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
 }

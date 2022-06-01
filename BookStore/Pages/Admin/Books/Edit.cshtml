@@ -1,4 +1,37 @@
-﻿@page
+﻿@page "{id:int}"
 @model BookStore.Pages.Admin.Books.EditModel
 @{
+    <h2>Edit book</h2>
+    <p></p>
+    <a href="~/Admin/Books/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <form method="post">
+        <input type="hidden" name="Id" value="@Model.Book.Id"/>
+        <p>
+            <label>Title: </label>
+            <input type="text" name="Title" value="@Model.Book.Title"/>
+        </p>
+        <p>
+            <label>Author: </label>
+            <input type="text" name="Author" value="@Model.Book.Author"/>
+        </p>
+        <p>
+            <label>Language: </label>
+            <input type="text" name="Language" value="@Model.Book.Language"/>
+        </p>
+        <p>
+            <label>Pages: </label>
+            <input type="number" name="Pages" value="@Model.Book.Pages"/>
+        </p>
+        <p>
+            <label>Genre: </label>
+            <input type="text" name="Genre" value="@Model.Book.Genre"/>
+        </p>
+        <p>
+            <label>Price: </label>
+            <input type="number" name="Price" step=0.01 value="@Model.Book.Price"/>
+        </p>
+        <p><input type="hidden" name="ShoppingCartId" value="@Model.Book.ShoppingCartId"/></p>
+        <button type="submit">Submit changes</button>
+    </form>
 }
