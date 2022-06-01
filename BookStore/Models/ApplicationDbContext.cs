@@ -8,6 +8,7 @@ namespace BookStore.Models
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<BookShoppingCart> BookShoppingCarts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -30,9 +31,21 @@ namespace BookStore.Models
             modelBuilder.Entity<User>()
                 .HasOne(p => p.ShoppingCart).WithOne(p => p.User);
             modelBuilder.Entity<ShoppingCart>()
-                .HasMany(p => p.Books).WithMany(b => b.ShoppingCarts);
+                .HasMany(p => p.Books).WithMany(b => b.ShoppingCarts)
+                .UsingEntity<BookShoppingCart>(
+                    b=>b
+                        .HasOne(u=>u.ShoppingCart)
+                        .WithMany(b=>b.BookShoppingCarts)
+                        .HasForeignKey(k=>k.ShoppingCartId)
+                    );
             modelBuilder.Entity<Book>()
-                .HasMany(b => b.ShoppingCarts).WithMany(c => c.Books);
+                .HasMany(b => b.ShoppingCarts).WithMany(c => c.Books)
+                .UsingEntity<BookShoppingCart>(
+                    b=>b
+                        .HasOne(b=>b.Book)
+                        .WithMany(b=>b.BookShoppingCarts)
+                        .HasForeignKey(k=>k.BookId)
+                    );
         }
     }
 }

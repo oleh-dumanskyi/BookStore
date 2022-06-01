@@ -7,7 +7,7 @@ namespace BookStore.Models.Entities
     {
         [Required]
         [Key]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Название")]
         public string Title { get; set; }
@@ -28,6 +28,7 @@ namespace BookStore.Models.Entities
         [Range(0, Int32.MaxValue, ErrorMessage = "Некорректная стоимость")]
         public decimal Price { get; set; }
         public List<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
+        public List<BookShoppingCart> BookShoppingCarts { get; set; } = new List<BookShoppingCart>();
         public int ShoppingCartId { get; set; }
     }
 }
