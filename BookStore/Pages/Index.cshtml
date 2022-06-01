@@ -3,7 +3,7 @@
 @{
     <h2>Book store</h2><p></p>
     <a href="/login"><input type="button" value="Login"></a><br><br>
-    <table>
+    <table style="border-style: solid; border-color: lightgrey; border-collapse: collapse">
         <tr><th>#</th><th>Название</th><th>Автор</th><th>Язык</th><th>Страницы</th><th>Жанр</th><th>Цена</th></tr>
         @foreach (var book in Model._context.Books)
         {

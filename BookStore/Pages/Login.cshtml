@@ -2,7 +2,7 @@
 @model BookStore.Pages.LoginModel
 @{
     <h2>Login Form</h2>
-    <form method='post'>
+    <form method='post' style="width: 15%; border-style: solid; border-color: lightgrey">
         <p>
             <label>Email</label><br />
             <input name='email' />
@@ -12,5 +12,8 @@
             <input type='password' name='password' />
         </p>
         <input type='submit' value='Login' />
+        <p>
+            <a href="/Registration"><input type="button" value="New account"/></a>
+        </p>
     </form>
 }

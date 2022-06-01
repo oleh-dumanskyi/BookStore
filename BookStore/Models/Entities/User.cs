@@ -18,8 +18,9 @@ namespace BookStore.Models.Entities
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
-        [Required]
-        public List<Book> ShoppingCart { get; set; }
+
+        [Required] public List<Book> ShoppingCart { get; set; } = new List<Book>();
+
         [Required]
         public Role Role { get; set; }
         
