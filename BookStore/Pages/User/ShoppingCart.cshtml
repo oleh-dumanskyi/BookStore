@@ -1,13 +1,27 @@
-﻿@page
+﻿@page "{id:int?}"
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model BookStore.Pages.User.ShoppingCartModel
 @{
-    <h4>Shooping Cart</h4><p></p>
+    <h2>Shooping Cart</h2><p></p>
     <a href="/User/Index"><input type="button" value="Go Back"></a><br><br>
-    <table style="border-style: solid; border-color: lightgrey; border-collapse: collapse">
-        <tr><th>#</th><th>Название</th><th>Автор</th><th>Язык</th><th>Страницы</th><th>Жанр</th><th>Цена</th></tr>
-        @foreach (var book in @Model.Books)
-        {
-            <tr><td>@book.Id</td><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td></tr>
-        }
-    </table>
-}
+    @if (@Model.Books.Count == 0)
+    {
+        <h2>Cart is empty</h2>
+    }
+    else
+    {
+        <table style="border-style: solid; border-color: lightgrey; border-collapse: collapse">
+            <tr><th>#</th><th>Название</th><th>Автор</th><th>Язык</th><th>Страницы</th><th>Жанр</th><th>Цена</th><th></th></tr>
+            @foreach (var book in @Model.Books)
+            {
+                <tr><td>@book.Id</td><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
+                    <td>
+                        <form method="post">
+                            <button type="submit" asp-page-handler="delete" asp-route-id="@book.Id">Remove from cart</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    }

@@ -1,4 +1,23 @@
 ﻿@page
 @model BookStore.Pages.RegistrationModel
 @{
+    <h2>Registration form</h2>
+    <form method="post" style="width: 17%; border-style: solid; border-color: lightgrey">
+        <input type="hidden" name="Id"/>
+        <p>
+            <label>Email: </label>
+            <input type="email" name="Email">
+        </p>
+        <p>
+            <label>Password: </label>
+            <input type="password" name="Password"/>
+        </p>
+        <p>
+            <label>Name: </label>
+            <input type="text" name="Name"/>
+        </p>
+        <p>
+            <button type="submit">Sign Up</button>
+        </p>
+    </form>
 }
