@@ -1,11 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Models.Entities
+namespace BookStore.Models.Entities;
+
+[Owned]
+public class Role
 {
-    [Owned]
-    public class Role
+    public Role(string name)
     {
-        public string Name { get; set; }
-        public Role(string name) => Name = name;
+        Name = name;
     }
+
+    public string Name { get; set; }
 }

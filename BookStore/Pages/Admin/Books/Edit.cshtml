@@ -3,7 +3,9 @@
 @{
     <h2>Edit book</h2>
     <p></p>
-    <a href="~/Admin/Books/Index"><input type="button" value="Back"/></a>
+    <a href="~/Admin/Books/Index">
+        <input type="button" value="Back"/>
+    </a>
     <p></p>
     <form method="post">
         <input type="hidden" name="Id" value="@Model.Book.Id"/>
@@ -31,7 +33,9 @@
             <label>Price: </label>
             <input type="number" name="Price" step=0.01 value="@Model.Book.Price"/>
         </p>
-        <p><input type="hidden" name="ShoppingCartId" value="@Model.Book.ShoppingCartId"/></p>
+        <p>
+            <input type="hidden" name="ShoppingCartId" value="@Model.Book.ShoppingCartId"/>
+        </p>
         <button type="submit">Submit changes</button>
     </form>
 }

@@ -1,14 +1,22 @@
 ﻿@page
 @model BookStore.Pages.IndexModel
 @{
-    <h2>Book store</h2><p></p>
-    <a href="/login"><input type="button" value="Login"></a><br><br>
-    <table style="border-style: solid; border-color: lightgrey; border-collapse: collapse">
-        <tr><th>Title</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th></tr>
+    <h2>Book store</h2>
+    <p></p>
+    <a href="/login">
+        <input type="button" value="Login">
+    </a>
+    <br><br>
+    <table style="border-collapse: collapse; border-color: lightgrey; border-style: solid;">
+        <tr>
+            <th>Title</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th>
+        </tr>
         @foreach (var book in Model.Context.Books)
         {
-            <tr><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td></tr>
+            <tr>
+                <td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
+            </tr>
         }
     </table>
-}
+    }
 

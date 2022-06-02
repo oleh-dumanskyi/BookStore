@@ -4,15 +4,22 @@
 @{
     <h2>Manage books</h2>
     <p></p>
-    <a href="/Admin/Books/Create"><input type="button" value="Create book"/></a>
+    <a href="/Admin/Books/Create">
+        <input type="button" value="Create book"/>
+    </a>
     <p></p>
-    <a href="~/Admin/Index"><input type="button" value="Back"/></a>
+    <a href="~/Admin/Index">
+        <input type="button" value="Back"/>
+    </a>
     <p></p>
-    <table style="border-style: solid; border-collapse: collapse; border-color: lightgrey">
-        <tr><th>Title</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th><th> </th><th> </th></tr>
+    <table style="border-collapse: collapse; border-color: lightgrey; border-style: solid;">
+        <tr>
+            <th>Title</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th><th> </th><th> </th>
+        </tr>
         @foreach (var book in Model.Context.Books)
         {
-            <tr><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
+            <tr>
+                <td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
                 <td>
                     <form method="post">
                         <button type="submit" asp-page="Edit" asp-route-id="@book.Id">Edit</button>

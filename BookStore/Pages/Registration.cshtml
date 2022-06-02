@@ -2,7 +2,7 @@
 @model BookStore.Pages.RegistrationModel
 @{
     <h2>Registration form</h2>
-    <form method="post" style="width: 17%; border-style: solid; border-color: lightgrey">
+    <form method="post" style="border-color: lightgrey; border-style: solid; width: 17%;">
         <input type="hidden" name="Id"/>
         <p>
             <label>Email: </label>
@@ -17,7 +17,10 @@
             <input type="text" name="Name"/>
         </p>
         <p>
-            <button type="submit">Sign Up</button>  <a href="/index"><input type="button" value="Back"/></a>
+            <button type="submit">Sign Up</button>
+            <a href="/index">
+                <input type="button" value="Back"/>
+            </a>
         </p>
     </form>
 }

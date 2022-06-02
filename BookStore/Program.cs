@@ -2,54 +2,53 @@ using BookStore.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore
+namespace BookStore;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllersWithViews();
+
+        builder.Services.AddRazorPages(options =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            options.Conventions.AuthorizeAreaFolder("Admin", "/Pages/", "Admin");
+            options.Conventions.AuthorizeAreaFolder("User", "/Pages/", "Admin, User");
+        });
 
-            builder.Services.AddControllersWithViews();
-
-            builder.Services.AddRazorPages(options =>
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
             {
-                options.Conventions.AuthorizeAreaFolder("Admin", "/Pages/", "Admin");
-                options.Conventions.AuthorizeAreaFolder("User", "/Pages/", "Admin, User");
+                options.LoginPath = "/login";
+                options.AccessDeniedPath = "/accessdenied";
             });
 
-            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(options =>
-                {
-                    options.LoginPath = "/login";
-                    options.AccessDeniedPath = "/accessdenied";
-                });
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Admin", p => p.RequireRole("Admin"));
+            options.AddPolicy("User", p => p.RequireRole("User"));
+        });
 
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Admin", p=>p.RequireRole("Admin"));
-                options.AddPolicy("User", p=>p.RequireRole("User"));
-            });
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("DefaultConnection"));
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString: "DefaultConnection"));
+        var app = builder.Build();
 
-            var app = builder.Build();
+        app.UseAuthentication();
 
-            app.UseAuthentication();
+        app.UseHttpsRedirection();
 
-            app.UseHttpsRedirection();
+        app.UseRouting();
 
-            app.UseRouting();
+        app.UseAuthorization();
 
-            app.UseAuthorization();
+        app.MapRazorPages();
 
-            app.MapRazorPages();
+        app.MapControllers();
 
-            app.MapControllers();
+        app.MapDefaultControllerRoute();
 
-            app.MapDefaultControllerRoute();
-
-            app.Run();
-        }
+        app.Run();
     }
 }

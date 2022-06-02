@@ -3,31 +3,31 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookStore.Pages.Admin.Books
+namespace BookStore.Pages.Admin.Books;
+
+[Authorize(Roles = "Admin")]
+public class IndexModel : PageModel
 {
-    [Authorize(Roles = "Admin")]
-    public class IndexModel : PageModel
+    public IndexModel(ApplicationDbContext context)
     {
-        public ApplicationDbContext Context { get; set; }
+        Context = context;
+    }
 
-        public IndexModel(ApplicationDbContext context)
+    public ApplicationDbContext Context { get; set; }
+
+    public void OnGet()
+    {
+    }
+
+    public IActionResult OnPostDelete(int? id)
+    {
+        var book = Context.Books.Find(id);
+        if (book != null)
         {
-            Context = context;
+            Context.Books.Remove(book);
+            Context.SaveChanges();
         }
 
-        public void OnGet()
-        {
-        }
-
-        public IActionResult OnPostDelete(int? id)
-        {
-            var book = Context.Books.Find(id);
-            if (book != null)
-            {
-                Context.Books.Remove(book);
-                Context.SaveChanges();
-            }
-            return RedirectToPage("/Admin/Books/Index");
-        }
+        return RedirectToPage("/Admin/Books/Index");
     }
 }

@@ -4,15 +4,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookStore.Pages
+namespace BookStore.Pages;
+
+[Authorize(Roles = "Admin, User")]
+public class LogoutModel : PageModel
 {
-    [Authorize(Roles = "Admin, User")]
-    public class LogoutModel : PageModel
+    public IActionResult OnGet()
     {
-        public IActionResult OnGet()
-        {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToPagePermanent("/Index");
-        }
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToPagePermanent("/Index");
     }
 }

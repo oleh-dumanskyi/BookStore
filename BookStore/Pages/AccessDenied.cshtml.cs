@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookStore.Pages
+namespace BookStore.Pages;
+
+public class AccessDeniedModel : PageModel
 {
-    public class AccessDeniedModel : PageModel
+    public void OnGet()
     {
-        public void OnGet()
-        {
-        }
     }
 }
