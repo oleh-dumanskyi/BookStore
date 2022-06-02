@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Models.Entities
 {
@@ -27,8 +26,8 @@ namespace BookStore.Models.Entities
         [Display(Name = "Стоимость")]
         [Range(0, Int32.MaxValue, ErrorMessage = "Некорректная стоимость")]
         public decimal Price { get; set; }
-        public List<ShoppingCart> ShoppingCarts { get; set; } = new List<ShoppingCart>();
-        public List<BookShoppingCart> BookShoppingCarts { get; set; } = new List<BookShoppingCart>();
+        public List<ShoppingCart> ShoppingCarts { get; set; } = new();
+        public List<BookShoppingCart> BookShoppingCarts { get; set; } = new();
         public int ShoppingCartId { get; set; }
     }
 }

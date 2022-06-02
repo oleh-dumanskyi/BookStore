@@ -10,13 +10,13 @@ namespace BookStore.Pages.Admin.Books
     [IgnoreAntiforgeryToken]
     public class CreateModel : PageModel
     {
-        public ApplicationDbContext _context { get; set; }
+        public ApplicationDbContext Context { get; set; }
         [BindProperty]
         public Book? Book { get; set; } = new ();
 
         public CreateModel(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         public void OnGet()
@@ -27,8 +27,8 @@ namespace BookStore.Pages.Admin.Books
         {
             if (Book.Title == null || Book.Author == null || Book.Language == null)
                 return BadRequest("Incorrect data input");
-            _context.Books.Add(Book);
-            _context.SaveChanges();
+            Context.Books.Add(Book);
+            Context.SaveChanges();
             return RedirectToAction("Admin/Books/Index");
         }
     }

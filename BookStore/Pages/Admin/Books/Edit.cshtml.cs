@@ -10,18 +10,18 @@ namespace BookStore.Pages.Admin.Books
     [IgnoreAntiforgeryToken]
     public class EditModel : PageModel
     {
-        public ApplicationDbContext _context { get; set; }
+        public ApplicationDbContext Context { get; set; }
 
         public EditModel(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
         [BindProperty]
         public Book? Book { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Book = _context.Books.First(b=>b.Id == id);
+            Book = Context.Books.First(b=>b.Id == id);
             if (Book == null) return NotFound();
             return Page();
         }
@@ -29,8 +29,8 @@ namespace BookStore.Pages.Admin.Books
         public IActionResult OnPost()
         {
             if (Book.Title == null || Book.Author == null || Book.Language == null) return RedirectToPage("");
-            _context.Books.Update(Book!);
-            _context.SaveChanges();
+            Context.Books.Update(Book!);
+            Context.SaveChanges();
             return RedirectToPage("/Admin/Books/Index");
         }
     }

@@ -3,7 +3,7 @@
 @model BookStore.Pages.User.IndexModel
 @{
     <h2>Book store</h2><p></p>
-    <p>Welcome, @Model._context.Users.FirstOrDefault(u=>u.Email == HttpContext.User.Identity.Name).Name</p>
+    <p>Welcome, @Model.Context.Users.FirstOrDefault(u=>u.Email == HttpContext.User.Identity.Name).Name</p>
     <p></p>
     <p></p>
     <a href="~/User/shoppingcart"><input type="button" value="Shopping Cart"></a>
@@ -12,7 +12,7 @@
     <br><p></p>
     <table style="border-style: solid; border-collapse: collapse; border-color: lightgrey">
             <tr><th>TItle</th><th>Author</th><th>Language</th><th>Pages</th><th>Genre</th><th>Price</th><th></th></tr>
-            @foreach (var book in Model._context.Books)
+            @foreach (var book in Model.Context.Books)
             {
                 <tr><td>@book.Title</td><td>@book.Author</td><td>@book.Language</td><td>@book.Pages</td><td>@book.Genre</td><td>@book.Price</td>
                     <td>

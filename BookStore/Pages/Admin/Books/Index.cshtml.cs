@@ -8,11 +8,11 @@ namespace BookStore.Pages.Admin.Books
     [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
-        public ApplicationDbContext _context { get; set; }
+        public ApplicationDbContext Context { get; set; }
 
         public IndexModel(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         public void OnGet()
@@ -21,11 +21,11 @@ namespace BookStore.Pages.Admin.Books
 
         public IActionResult OnPostDelete(int? id)
         {
-            var book = _context.Books.Find(id);
+            var book = Context.Books.Find(id);
             if (book != null)
             {
-                _context.Books.Remove(book);
-                _context.SaveChanges();
+                Context.Books.Remove(book);
+                Context.SaveChanges();
             }
             return RedirectToPage("/Admin/Books/Index");
         }

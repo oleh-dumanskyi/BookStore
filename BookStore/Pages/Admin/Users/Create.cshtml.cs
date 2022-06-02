@@ -9,11 +9,11 @@ namespace BookStore.Pages.Admin.Users
     [IgnoreAntiforgeryToken]
     public class CreateModel : PageModel
     {
-        public ApplicationDbContext _context { get; set; }
+        public ApplicationDbContext Context { get; set; }
 
         public CreateModel(ApplicationDbContext context)
         {
-            _context = context;
+            Context = context;
         }
         [BindProperty]
         public Models.Entities.User? User { get; set; } = new();
@@ -26,8 +26,8 @@ namespace BookStore.Pages.Admin.Users
         {
             if (User.Email == null || User.Password == null || User.Name == null || User.Role == null)
                 return BadRequest("Incorrect data input");
-            _context.Users.Add(User);
-            _context.SaveChanges();
+            Context.Users.Add(User);
+            Context.SaveChanges();
             return RedirectToPage("/Admin/Users/Index");
         }
     }

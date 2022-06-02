@@ -19,8 +19,8 @@ namespace BookStore.Models.Entities
         [Display(Name = "Пароль")]
         public string Password { get; set; }
         [Required] 
-        public ShoppingCart ShoppingCart { get; set; } = new ShoppingCart();
+        public ShoppingCart ShoppingCart { get; set; } = new();
         [Required]
-        public Role Role { get; set; } = new Role("User");
+        public Role Role { get; set; } = new("User");
     }
 }

@@ -1,10 +1,8 @@
-using System.Security.Claims;
-using System.Security.Principal;
+using BookStore.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BookStore.Models;
-using BookStore.Models.Entities;
-using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace BookStore.Pages
 {
@@ -12,8 +10,8 @@ namespace BookStore.Pages
     public class LoginModel : PageModel
     {
 
-        public ApplicationDbContext _concext;
-        public LoginModel(ApplicationDbContext context) => _concext = context;
+        public ApplicationDbContext Concext;
+        public LoginModel(ApplicationDbContext context) => Concext = context;
 
         public void OnGet()
         {
@@ -30,13 +28,13 @@ namespace BookStore.Pages
             string password = form["password"];
             if (email == string.Empty || password == string.Empty)
                 return BadRequest("Введите email и пароль");
-            Models.Entities.User user = _concext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+            Models.Entities.User user = Concext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
             if (user is null)
                 return NotFound("Некорректный email или пароль");
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                new(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
             };
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
