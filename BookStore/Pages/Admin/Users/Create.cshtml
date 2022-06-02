@@ -1,4 +1,32 @@
 ﻿@page
 @model BookStore.Pages.Admin.Users.CreateModel
 @{
+    <h2>Create user</h2>
+    <p></p>
+    <a href="~/Admin/Users/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <form method="post">
+        <input type="hidden" name="Id" />
+        <p>
+            <label>Email: </label>
+            <input type="email" name="Email"/>
+        </p>
+        <p>
+            <label>Password: </label>
+            <input type="password" name="Password"/>
+        </p>
+        <p>
+            <label>Name: </label>
+            <input type="text" name="Name"/>
+        </p>
+        <p>
+            <label>Role: </label>
+            <select name="Role">
+                <option name="User" value="User">User</option>
+                <option name="Admin" value="Admin">Admin</option>
+            </select>
+        </p>
+        <p></p>
+        <button type="submit">Create user</button>
+    </form>
 }

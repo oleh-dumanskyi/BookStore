@@ -1,4 +1,29 @@
 ﻿@page
 @model BookStore.Pages.Admin.Users.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    <h2>Manage users</h2>
+    <p></p>
+    <a href="/Admin/Users/Create"><input type="button" value="Create user"/></a>
+    <p></p>
+    <a href="~/Admin/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <table style="border-style: solid; border-collapse: collapse; border-color: lightgrey">
+        <tr><th>Email</th><th>Password</th><th>Name</th><th>Role</th><th></th><th></th></tr>
+        @foreach (var user in @Model._context.Users)
+        {
+         <tr><td>@user.Email</td><td>@user.Password</td><td>@user.Name</td><td>@user.Role.Name</td>
+            <td>
+                <form method="post">
+                    <button type="submit" asp-page="Edit" asp-route-id="@user.Id">Edit</button>
+                </form>
+            </td>
+            <td>
+                <form method="post">
+                    <button type="submit" asp-page-handler="Delete" asp-route-id="@user.Id">Delete</button>
+                </form>
+            </td>
+        </tr>
+        }
+    </table>
 }

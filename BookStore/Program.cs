@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Security.Claims;
 using BookStore.Models;
 using BookStore.Models.Entities;
@@ -11,6 +12,9 @@ namespace BookStore
     {
         public static void Main(string[] args)
         {
+#if DEBUG
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+#endif
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();

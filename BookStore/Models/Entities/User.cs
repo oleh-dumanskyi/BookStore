@@ -22,6 +22,5 @@ namespace BookStore.Models.Entities
         public ShoppingCart ShoppingCart { get; set; } = new ShoppingCart();
         [Required]
         public Role Role { get; set; } = new Role("User");
-
     }
 }

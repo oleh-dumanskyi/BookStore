@@ -1,4 +1,43 @@
-﻿@page
+﻿@page "{id:int}"
 @model BookStore.Pages.Admin.Users.EditModel
 @{
+    <h2>Edit user</h2>
+    <p></p>
+    <a href="~/Admin/Users/Index"><input type="button" value="Back"/></a>
+    <p></p>
+    <form method="post">
+        @*<input type="hidden" name="Id" value="@Model.User.Id"/>*@
+        <p>
+            <label>Email: </label>
+            <input type="email" name="Email" value="@Model.User.Email"/>
+        </p>
+        <p>
+            <label>Password: </label>
+            <input type="text" name="Password" value="@Model.User.Password"/>
+        </p>
+        <p>
+            <label>Name: </label>
+            <input type="text" name="Name" value="@Model.User.Name" />
+        </p>
+        <p>
+            <label>Role: </label>
+            @if (@Model.User.Role.Name == "User")
+            {
+                <select name="Role">
+                    <option name="User" value="User" selected>User</option>
+                    <option name="Admin" value="Admin">Admin</option>
+                </select>
+            }
+            else if(@Model.User.Role.Name == "Admin")
+            {
+                <select name="Role">
+                    <option name="User" value="User">User</option>
+                    <option name="Admin" value="Admin" selected>Admin</option>
+                </select>
+            }
+            <input type="hidden"/ name="ShoppingCart" value="@Model.User.ShoppingCart">
+        </p>
+        <p></p>
+        <button type="submit">Submint changes</button>
+    </form>
 }

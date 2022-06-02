@@ -29,7 +29,7 @@ namespace BookStore.Models
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<User>()
-                .HasOne(p => p.ShoppingCart).WithOne(p => p.User);
+                .HasOne(p => p.ShoppingCart).WithOne(p => p.User).OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ShoppingCart>()
                 .HasMany(p => p.Books).WithMany(b => b.ShoppingCarts)
                 .UsingEntity<BookShoppingCart>(
